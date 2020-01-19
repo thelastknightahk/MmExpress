@@ -12,7 +12,7 @@ import com.example.mmexpress.R;
 
 public class ViewHolder extends RecyclerView.ViewHolder {
     public TextView txt_pop,expname,exptype,routedate,routetime,routepirce,
-            gatename,gatedate,gatetime,gateaddress;
+            gatename,gatedate,gatetime,gateaddress,price_bus,route_bus;
     public ImageView img_pop,expimg,busgateimg;
     public CardView gate_card;
     public ViewHolder(@NonNull View itemView) {
@@ -32,5 +32,8 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         gateaddress=(TextView)itemView.findViewById(R.id.gate_address);
         busgateimg=(ImageView)itemView.findViewById(R.id.gatebus_img);
         gate_card=(CardView)itemView.findViewById(R.id.gate_card);
+        //for bus and route
+        price_bus=(TextView)itemView.findViewById(R.id.price_bus);
+        route_bus=(TextView)itemView.findViewById(R.id.route_bus);
     }
 }

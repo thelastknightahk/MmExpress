@@ -22,7 +22,7 @@ import java.util.StringTokenizer;
 public class GateAdapter extends RecyclerView.Adapter<ViewHolder> {
     Context context;
     List<GateModel.gateData> gateList;
-    int gate_id;
+    public static int gate_id;
 
     public GateAdapter(Context context, List<GateModel.gateData> gateList) {
         this.context = context;
@@ -40,7 +40,7 @@ public class GateAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int i) {
-        GateModel.gateData mygate = gateList.get(i);
+        final GateModel.gateData mygate = gateList.get(i);
         holder.gatename.setText("" + mygate.getTitle());
         String date = mygate.getCreated_at();
         StringTokenizer st = new StringTokenizer(date, " ");
@@ -60,7 +60,7 @@ public class GateAdapter extends RecyclerView.Adapter<ViewHolder> {
         holder.gate_card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                gate_id=i;
+                gate_id=mygate.getId();
                 context.startActivity(new Intent(context, DetailView.class));
             }
         });
@@ -68,7 +68,7 @@ public class GateAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     @Override
     public int getItemCount() {
-        Log.d("Data", "" + gateList.size());
+
         return gateList.size();
     }
 }
