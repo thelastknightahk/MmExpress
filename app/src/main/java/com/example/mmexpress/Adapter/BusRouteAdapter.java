@@ -31,8 +31,7 @@ public class BusRouteAdapter extends RecyclerView.Adapter<ViewHolder> {
     Context context;
     List<BusModel.busData> busData;
     List<RouteModel.routeData> routeData;
-    Map<String, List<String>> myroute = new HashMap<String, List<String>>();
-    List<String> route=new ArrayList<>();
+
     public BusRouteAdapter(Context context, List<BusModel.busData> busData) {
         this.context = context;
         this.busData = busData;
@@ -49,8 +48,8 @@ public class BusRouteAdapter extends RecyclerView.Adapter<ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int i) {
-        BusModel.busData bus = busData.get(i);
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int i) {
+        final BusModel.busData bus = busData.get(i);
         holder.price_bus.setText("" + bus.getPrice());
         RouteInterface busroute = RouteRetrofit.getRoute().create(RouteInterface.class);
         Call<RouteModel> routeModelCall = busroute.getRouteData(bus.getId());
@@ -60,8 +59,15 @@ public class BusRouteAdapter extends RecyclerView.Adapter<ViewHolder> {
             public void onResponse(Call<RouteModel> call, Response<RouteModel> response) {
                 RouteModel routeModel = response.body();
                 routeData = routeModel.routeDataList;
+                String routes_data = "";
 
-                Log.d("Route Data", index + "*" + routeData.size());
+                for (int index = 0; index < routeData.size(); index++) {
+
+                    routes_data += routeData.get(index).getPlace() + "   ";
+                }
+
+                holder.route_bus.setText("" + routes_data);
+
 
             }
 

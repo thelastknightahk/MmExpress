@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -58,12 +59,14 @@ public class GateFragment extends Fragment {
                 gatedata_list=gateModel.gate_datalist;
                 gateAdapter=new GateAdapter(getContext(), gatedata_list);
                 gateview.setAdapter(gateAdapter);
+                Toast.makeText(getContext(), "OK", Toast.LENGTH_SHORT).show();
                 Log.d("Bus Data ",""+response.code()+"*"+gatedata_list.size());
             }
 
             @Override
             public void onFailure(Call<GateModel> call, Throwable t) {
-
+                Log.d("ErrorData",""+t.getMessage());
+                Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
             }
         });
     }
